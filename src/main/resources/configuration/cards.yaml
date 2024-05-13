@@ -4,11 +4,9 @@ spring:
     username: root
     password: root
     driverClassName: org.postgresql.Driver
+
   jpa:
     open-in-view: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -17,6 +15,12 @@ spring:
       mode: always
 
 management:
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
   endpoints:
     web:
       exposure:
@@ -26,10 +30,28 @@ management:
       enabled: true
     liveness-state:
       enabled: true
-  endpoint:
-    health:
-      probes:
-        enabled: true
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+    #    change in future for dns name registration
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "cards"
+    version: "1.0.0"
 
 server:
   port: 9000
