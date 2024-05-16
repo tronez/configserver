@@ -1,0 +1,38 @@
+server:
+  port: 8072
+
+spring:
+  application:
+    name: "gatewayserver"
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+        lowerCaseServiceId: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    #    change in future for dns name registration
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "gatewayserver"
+    version: "1.0.0"
